@@ -6,7 +6,6 @@ import (
 
 func Start() {
 	router := gin.Default()
-	v1 := router.Group("/v1")
 
 	router.Run()
 }

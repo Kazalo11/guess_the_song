@@ -54,7 +54,8 @@ func getSpotifyAuthURL(c *gin.Context) {
 
 func completeAuth(c *gin.Context) {
 	tok, err := auth.Token(c.Request.Context(), state, c.Request,
-		oauth2.SetAuthURLParam("code_verifier", codeVerifier))
+		oauth2.SetAuthURLParam("code_verifier", codeVerifier),
+		oauth2.SetAuthURLParam("client_id", os.Getenv("SPOTIFY_ID")))
 	if err != nil {
 		c.JSON(http.StatusForbidden, fmt.Sprintf("Error getting token: %v", err))
 	}

@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/Kazalo11/guess_the_song/config"
 	"github.com/Kazalo11/guess_the_song/internals/util"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/oauth2"
@@ -23,7 +24,7 @@ var (
 	)
 	state        = "abc123"
 	codeVerifier = util.RandomBytesInHex(32)
-	ch           = make(chan *spotify.Client)
+	client       *spotify.Client
 )
 
 const redirectURI = "http://localhost:8080/v1/spotify/callback"
@@ -44,7 +45,7 @@ func getSpotifyAuthURL(c *gin.Context) {
 	url := auth.AuthURL(state,
 		oauth2.SetAuthURLParam("code_challenge_method", "S256"),
 		oauth2.SetAuthURLParam("code_challenge", codeChallenge),
-		oauth2.SetAuthURLParam("client_id", os.Getenv("CLIENT_ID")),
+		oauth2.SetAuthURLParam("client_id", os.Getenv("SPOTIFY_ID")),
 	)
 
 	c.JSON(http.StatusOK, gin.H{"authUrl": url})
@@ -55,12 +56,12 @@ func completeAuth(c *gin.Context) {
 	tok, err := auth.Token(c.Request.Context(), state, c.Request,
 		oauth2.SetAuthURLParam("code_verifier", codeVerifier))
 	if err != nil {
-		c.JSON(http.StatusForbidden, fmt.Sprintf("Error getting token: %w", err))
+		c.JSON(http.StatusForbidden, fmt.Sprintf("Error getting token: %v", err))
 	}
 	if st := c.Request.FormValue("state"); st != state {
 		c.JSON(http.StatusNotFound, "State mismatch")
 	}
-	client := spotify.New(auth.Client(c.Request.Context(), tok))
+	client = spotify.New(auth.Client(c.Request.Context(), tok))
 	fmt.Printf("Login completed")
-	ch <- client
+	c.Redirect(http.StatusFound, config.GetFrontendUrl())
 }

@@ -3,6 +3,7 @@ package server
 import (
 	"net/http"
 
+	"github.com/Kazalo11/guess_the_song/config"
 	"github.com/gin-gonic/gin"
 )
 

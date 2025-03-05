@@ -7,6 +7,7 @@ import (
 
 func Start() {
 	router := gin.Default()
+	router.Use(CORSMiddleware())
 	v1 := router.Group("/v1")
 	addRoutes(v1)
 	router.Run()

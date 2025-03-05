@@ -66,3 +66,7 @@ func completeAuth(c *gin.Context) {
 	fmt.Printf("Login completed")
 	c.Redirect(http.StatusFound, config.GetFrontendUrl())
 }
+
+//TODO: Add in api to get users playlists
+
+//TODO: Given a users playlist, get all songs

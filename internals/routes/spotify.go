@@ -28,6 +28,6 @@ func SpotifyRoutes(superRoute *gin.RouterGroup) {
 func getSpotifyAuthURL(c *gin.Context) {
 	url := auth.AuthURL(state)
 
-	c.JSON(http.StatusOK, gin.H{"url": url})
+	c.JSON(http.StatusOK, gin.H{"authUrl": url})
 
 }

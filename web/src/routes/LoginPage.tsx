@@ -1,8 +1,10 @@
 import { getSpotifyAuthUrl } from "@/client/ServerClient";
-import { useState } from "react";
+import { Button } from "@/components/shared/Button";
+import { ButtonGroup } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
 export default function LoginPage() {
-  const [authUrl, setAuthUrl] = useState<string | null>(null);
+  const [authUrl, setAuthUrl] = useState<string>("");
 
   useEffect(() => {
     const getAuthUrl = async () => {
@@ -12,5 +14,11 @@ export default function LoginPage() {
     getAuthUrl();
   });
 
-  return <></>;
+  return (
+    <div>
+      <ButtonGroup mt="24px">
+        <Button link={authUrl} text="Click this to login to spotify"></Button>
+      </ButtonGroup>
+    </div>
+  );
 }

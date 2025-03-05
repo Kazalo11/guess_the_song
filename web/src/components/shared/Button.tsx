@@ -13,6 +13,6 @@ export function Button(props: ButtonProps) {
   return props.link ? (
     <Link href={props.link}>{buttonElement}</Link>
   ) : (
-    { buttonElement }
+    buttonElement
   );
 }

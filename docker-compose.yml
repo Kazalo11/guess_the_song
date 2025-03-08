@@ -8,3 +8,9 @@ services:
     environment:
       SPOTIFY_ID: ${SPOTIFY_ID}
       SPOTIFY_SECRET: ${SPOTIFY_SECRET}
+  frontend:
+    build:
+      context: .
+      dockerfile: deployments/web/Dockerfile
+    ports:
+      - "3000:3000"

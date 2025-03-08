@@ -1,20 +1,20 @@
 import { Button } from "@/components/shared/Button";
 import Dropdown from "@/components/shared/Dropdown";
+import { useArtist } from "@/context/ArtistProvider";
 import { SpotifyService } from "@/generated";
-import {
-  ArtistOption,
-  artistsToArtistOption,
-} from "@/mapping/ArtistsToArtistOption";
+import { artistsToArtistOption } from "@/mapping/ArtistsToArtistOption";
 import { Card, Flex, Heading } from "@chakra-ui/react";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function MainPage() {
-  const [artist, setArtist] = useState<ArtistOption | null>(null);
+  const { artist, setArtist } = useArtist();
   const loadArtists = async (artistName: string) => {
     const response = await SpotifyService.searchForArtists(artistName);
     const artistOptions = artistsToArtistOption(response);
     return artistOptions;
   };
+
+  const navigate = useNavigate();
 
   return (
     <Flex align="center" justify="center" p={4}>

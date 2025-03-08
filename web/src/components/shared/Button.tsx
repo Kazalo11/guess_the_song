@@ -1,4 +1,5 @@
-import { Button as ChakraButton, Link } from "@chakra-ui/react";
+import { Button as ChakraButton } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 export type ButtonProps = {
   text: string;
@@ -6,7 +7,14 @@ export type ButtonProps = {
 };
 
 export function Button(props: ButtonProps) {
-  const buttonElement = (
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (props.link) {
+      navigate(props.link);
+    }
+  };
+  return (
     <ChakraButton
       size="lg"
       mt="24px"
@@ -19,14 +27,9 @@ export function Button(props: ButtonProps) {
       _active={{
         bg: "blue.700",
       }}
+      onClick={handleClick}
     >
       {props.text}
     </ChakraButton>
-  );
-
-  return props.link ? (
-    <Link href={props.link}>{buttonElement}</Link>
-  ) : (
-    buttonElement
   );
 }

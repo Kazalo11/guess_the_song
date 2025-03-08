@@ -39,6 +39,10 @@ func searchForArtists(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, fmt.Sprintf("Can't search for artists due to: %v", err))
 	}
+	if results == nil {
+		c.JSON(http.StatusNotFound, "Not artists found")
+		return
+	}
 	spotifyArtists := results.Artists.Artists
 
 	fmt.Printf("artists received: %v \n", spotifyArtists)

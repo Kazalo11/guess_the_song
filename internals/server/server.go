@@ -10,6 +10,7 @@ func Start() {
 	router.Use(CORSMiddleware())
 	v1 := router.Group("/v1")
 	addRoutes(v1)
+	routes.InitSpotifyClient()
 	router.Run()
 }
 

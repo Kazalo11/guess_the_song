@@ -9,33 +9,10 @@ import (
 	"os"
 
 	"github.com/Kazalo11/guess_the_song/config"
-	"github.com/Kazalo11/guess_the_song/internals/util"
 	"github.com/gin-gonic/gin"
-	"golang.org/x/oauth2"
-
 	"github.com/zmb3/spotify/v2"
-	spotifyauth "github.com/zmb3/spotify/v2/auth"
+	"golang.org/x/oauth2"
 )
-
-var (
-	auth = spotifyauth.New(
-		spotifyauth.WithRedirectURL(redirectURI),
-		spotifyauth.WithScopes(spotifyauth.ScopePlaylistReadPrivate, spotifyauth.ScopePlaylistReadCollaborative, spotifyauth.ScopeUserLibraryRead),
-	)
-	state        = "abc123"
-	codeVerifier = util.RandomBytesInHex(32)
-	client       *spotify.Client
-)
-
-const redirectURI = "http://localhost:8080/v1/spotify/callback"
-
-func SpotifyRoutes(superRoute *gin.RouterGroup) {
-	spotifyRouter := superRoute.Group("/spotify")
-	{
-		spotifyRouter.GET("/auth", getSpotifyAuthURL)
-		spotifyRouter.GET("/callback", completeAuth)
-	}
-}
 
 func getSpotifyAuthURL(c *gin.Context) {
 	sha2 := sha256.New()
@@ -62,11 +39,7 @@ func completeAuth(c *gin.Context) {
 	if st := c.Request.FormValue("state"); st != state {
 		c.JSON(http.StatusNotFound, "State mismatch")
 	}
-	client = spotify.New(auth.Client(c.Request.Context(), tok))
+	userClient = spotify.New(auth.Client(c.Request.Context(), tok))
 	fmt.Printf("Login completed")
 	c.Redirect(http.StatusFound, config.GetFrontendUrl())
 }
-
-//TODO: Add in api to get users playlists
-
-//TODO: Given a users playlist, get all songs

@@ -1,0 +1,78 @@
+openapi: 3.0.0
+info:
+  title: Guess The Song API
+  description: API for Guess The Song Spotify Integration
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+paths:
+  /v1/spotify/auth:
+    get:
+      summary: Get Spotify Authorization URL
+      description: Returns a URL that users can visit to authorize the application with their Spotify account
+      operationId: getSpotifyAuthUrl
+      tags:
+        - spotify
+      responses:
+        "200":
+          description: Successfully retrieved authorization URL
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthUrlResponse"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+  /v1/spotify/searchForArtists:
+    get:
+      summary: Get artists based on name
+      description: Gets spotify related artists from name
+      operationId: searchForArtists
+      tags:
+        - spotify
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+          description: name of the spotify artist
+          responses:
+            "200":
+              description: "Successfully got artists"
+              content:
+              application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Artist"
+
+
+components:
+  schemas:
+    AuthUrlResponse:
+      description: Schema for Spotify authentication URL response
+      type: object
+      properties:
+        authUrl:
+          type: string
+          description: The Spotify authorization URL
+          format: uri
+          pattern: ^https://accounts\.spotify\.com/authorize.*$
+          examples:
+            - https://accounts.spotify.com/authorize?client_id=xxx&response_type=code&redirect_uri=http://localhost:8080/v1/spotify/callback&scope=playlist-read-private+playlist-read-collaborative+user-library-read&state=abc123
+      required:
+        - authUrl
+      additionalProperties: false
+    Artist:
+      description: Internal Artist
+      type: object
+      properties:
+        

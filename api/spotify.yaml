@@ -31,7 +31,7 @@ paths:
                   error:
                     type: string
                     description: Error message
-  /v1/spotify/searchForArtists:
+  /v1/spotify/search/artists:
     get:
       summary: Get artists based on name
       description: Gets spotify related artists from name

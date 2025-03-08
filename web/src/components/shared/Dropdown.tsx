@@ -1,12 +1,10 @@
-import { getBackendUrl } from "@/utils/Config";
+import { SpotifyService } from "@/generated/services/SpotifyService";
 import AsyncSelect from "react-select/async";
-
-const artistSearchUrl = `${getBackendUrl}/v1/spotify/search/artists`;
 
 export default function Dropdown() {
   const loadArtists = async (artistName: string) => {
-    const response = await fetch(`${artistSearchUrl}?name=${artistName}`);
-    const artists = await response.json();
+    const response = await SpotifyService.searchForArtists(artistName);
+    console.log(response);
   };
 
   return <AsyncSelect cacheOptions loadOptions={loadArtists} />;

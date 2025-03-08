@@ -1,0 +1,37 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        # Build images using Docker Compose
+        docker-compose -f docker-compose.yml build
+
+        for image in $(docker-compose -f docker-compose.yml config | grep image: | awk '{print $2}'); do
+          docker tag $image gcr.io/$PROJECT_ID/$(basename $image):$COMMIT_SHA
+          docker push gcr.io/$PROJECT_ID/$(basename $image):$COMMIT_SHA
+        done
+
+  # Deploy backend service
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        gcloud run deploy guess_the_song_backend \
+          --image gcr.io/$PROJECT_ID/backend:$COMMIT_SHA \
+          --region europe-west2 \
+          --platform managed
+
+  # Deploy frontend service
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        gcloud run deploy guess_the_song_frontend \
+          --image gcr.io/$PROJECT_ID/frontend:$COMMIT_SHA \
+          --region europe-west2 \
+          --platform managed
+options:
+  logging: CLOUD_LOGGING_ONLY

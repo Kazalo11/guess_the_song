@@ -5,9 +5,9 @@ package spotify
 
 // Artist Internal Artist
 type Artist struct {
-	Id    string `json:"id"`
-	Image string `json:"image"`
-	Name  string `json:"name"`
+	Id       string `json:"id"`
+	ImageUrl string `json:"imageUrl"`
+	Name     string `json:"name"`
 }
 
 // AuthUrlResponse Schema for Spotify authentication URL response

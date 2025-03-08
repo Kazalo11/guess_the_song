@@ -8,6 +8,6 @@
 export type Artist = {
     name: string;
     id: string;
-    image: string;
+    imageUrl: string;
 };
 

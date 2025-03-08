@@ -88,11 +88,11 @@ components:
           type: string
         id: 
           type: string
-        image:
+        imageUrl:
           type: string
           format: uri
       required:
         - name
         - id
-        - image
+        - imageUrl
       additionalProperties: false

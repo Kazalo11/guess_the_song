@@ -11,7 +11,7 @@ func SpotifyArtistToArtist(fullArtist spotify.FullArtist) models.Artist {
 		Name: fullArtist.Name,
 	}
 	if len(fullArtist.Images) != 0 {
-		artist.Image = fullArtist.Images[0].URL
+		artist.ImageUrl = fullArtist.Images[0].URL
 	}
 	return artist
 

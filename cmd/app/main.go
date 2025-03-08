@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/Kazalo11/guess_the_song/internals/server"
+	"github.com/Kazalo11/guess_the_song/internal/server"
 	"github.com/joho/godotenv"
 )
 

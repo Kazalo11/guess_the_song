@@ -1,4 +1,4 @@
-package routes
+package client
 
 import (
 	"crypto/sha256"

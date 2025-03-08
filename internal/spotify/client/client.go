@@ -1,7 +1,7 @@
-package routes
+package client
 
 import (
-	"github.com/Kazalo11/guess_the_song/internals/util"
+	"github.com/Kazalo11/guess_the_song/internal/util"
 	"github.com/gin-gonic/gin"
 
 	"github.com/zmb3/spotify/v2"

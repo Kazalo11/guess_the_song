@@ -44,16 +44,25 @@ paths:
           schema:
             type: string
           description: name of the spotify artist
-          responses:
-            "200":
-              description: "Successfully got artists"
-              content:
-              application/json:
+      responses:
+        "200":
+          description: "Successfully got artists"
+          content:
+            application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/Artist"
-
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
 
 components:
   schemas:
@@ -75,4 +84,15 @@ components:
       description: Internal Artist
       type: object
       properties:
-        
+        name:
+          type: string
+        id: 
+          type: string
+        image:
+          type: string
+          format: uri
+      required:
+        - name
+        - id
+        - image
+      additionalProperties: false

@@ -1,7 +1,7 @@
 package server
 
 import (
-	"github.com/Kazalo11/guess_the_song/internals/routes"
+	spotifyClient "github.com/Kazalo11/guess_the_song/internal/spotify/client"
 	"github.com/gin-gonic/gin"
 )
 
@@ -10,10 +10,10 @@ func Start() {
 	router.Use(CORSMiddleware())
 	v1 := router.Group("/v1")
 	addRoutes(v1)
-	routes.InitSpotifyClient()
+	spotifyClient.InitSpotifyClient()
 	router.Run()
 }
 
 func addRoutes(superRoute *gin.RouterGroup) {
-	routes.SpotifyRoutes(superRoute)
+	spotifyClient.SpotifyRoutes(superRoute)
 }

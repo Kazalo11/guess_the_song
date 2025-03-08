@@ -1,4 +1,4 @@
-package routes
+package client
 
 import (
 	"context"
@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/Kazalo11/guess_the_song/internal/spotify/mapping"
+	models "github.com/Kazalo11/guess_the_song/internal/spotify/models"
 	"github.com/gin-gonic/gin"
 	"github.com/zmb3/spotify/v2"
 	spotifyauth "github.com/zmb3/spotify/v2/auth"
@@ -31,11 +33,22 @@ func InitSpotifyClient() {
 }
 
 func searchForArtists(c *gin.Context) {
+	fmt.Println("Looking for artists")
 	name := c.Query("name")
 	results, err := serverClient.Search(c, name, spotify.SearchTypeArtist)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, fmt.Sprintf("Can't search for artists due to: %v", err))
 	}
-	artists := results.Artists
+	spotifyArtists := results.Artists.Artists
+
+	fmt.Printf("artists received: %v \n", spotifyArtists)
+
+	artists := make([]models.Artist, 0, len(results.Artists.Artists))
+
+	for _, spotifyArtist := range spotifyArtists {
+		artist := mapping.SpotifyArtistToArtist(spotifyArtist)
+		artists = append(artists, artist)
+	}
+	c.JSON(http.StatusOK, artists)
 
 }

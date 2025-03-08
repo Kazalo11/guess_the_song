@@ -4,7 +4,6 @@ import { useArtist } from "@/context/ArtistProvider";
 import { SpotifyService } from "@/generated";
 import { artistsToArtistOption } from "@/mapping/ArtistsToArtistOption";
 import { Card, Flex, Heading } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
 
 export default function MainPage() {
   const { artist, setArtist } = useArtist();
@@ -13,8 +12,6 @@ export default function MainPage() {
     const artistOptions = artistsToArtistOption(response);
     return artistOptions;
   };
-
-  const navigate = useNavigate();
 
   return (
     <Flex align="center" justify="center" p={4}>

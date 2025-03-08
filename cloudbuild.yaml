@@ -23,7 +23,7 @@ steps:
           --region europe-west2 \
           --platform managed
 
-  # Deploy frontend service
+  # Deploy frontend service 
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     entrypoint: "bash"
     args:

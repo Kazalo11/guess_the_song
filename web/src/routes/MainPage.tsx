@@ -1,15 +1,18 @@
+import { Button } from "@/components/shared/Button";
 import Dropdown from "@/components/shared/Dropdown";
-import { Artist, SpotifyService } from "@/generated";
-import { artistsToArtistOption } from "@/mapping/ArtistsToArtistOption";
+import { SpotifyService } from "@/generated";
+import {
+  ArtistOption,
+  artistsToArtistOption,
+} from "@/mapping/ArtistsToArtistOption";
 import { Card, Flex, Heading } from "@chakra-ui/react";
 import { useState } from "react";
 
 export default function MainPage() {
-  const [artist, setArtist] = useState<Artist | undefined>(undefined);
+  const [artist, setArtist] = useState<ArtistOption | null>(null);
   const loadArtists = async (artistName: string) => {
     const response = await SpotifyService.searchForArtists(artistName);
     const artistOptions = artistsToArtistOption(response);
-    console.log(artistOptions);
     return artistOptions;
   };
 
@@ -22,7 +25,13 @@ export default function MainPage() {
           </Heading>
         </Card.Header>
         <Card.Body p={6}>
-          <Dropdown loadOptions={loadArtists} />
+          <Dropdown loadOptions={loadArtists} setValue={setArtist} />
+          {artist && (
+            <Button
+              link="/play"
+              text="Click this to confirm this artist for guess the song"
+            />
+          )}
         </Card.Body>
       </Card.Root>
     </Flex>

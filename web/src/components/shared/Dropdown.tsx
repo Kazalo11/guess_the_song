@@ -1,18 +1,27 @@
 import { Options } from "react-select";
 import AsyncSelect from "react-select/async";
 
-export type DropdownProps = {
-  loadOptions: (inputValue: string) => Promise<Options<unknown>>;
-};
+interface OptionType {
+  value: string | number;
+  label: string;
+  imageUrl?: string;
+}
 
-export default function Dropdown(props: DropdownProps) {
+export interface DropdownProps<Option extends OptionType> {
+  loadOptions: (inputValue: string) => Promise<Options<Option>>;
+  setValue: (value: Option | null) => void;
+}
+
+export default function Dropdown<Option extends OptionType>(
+  props: DropdownProps<Option>
+) {
   return (
     <AsyncSelect
       cacheOptions
+      onChange={(e) => props.setValue(e)}
       loadOptions={props.loadOptions}
       isClearable
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      formatOptionLabel={(option: any) => (
+      formatOptionLabel={(option: Option) => (
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
           {option.imageUrl && (
             <img

@@ -9,9 +9,22 @@ services:
     environment:
       SPOTIFY_ID: ${SPOTIFY_ID}
       SPOTIFY_SECRET: ${SPOTIFY_SECRET}
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
   frontend:
     build:
       context: .
       dockerfile: deployments/web/Dockerfile
     ports:
       - "3000:3000"
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+  watchtower:
+    image: containrrr/watchtower
+    command:
+      - "--label-enable"
+      - "--interval"
+      - "30"
+      - "--rolling-restart"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

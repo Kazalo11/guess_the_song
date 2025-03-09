@@ -26,7 +26,7 @@ export class SpotifyApiRequestFactory extends BaseAPIRequestFactory {
         let _config = _options || this.configuration;
 
         // Path Params
-        const localVarPath = '/v1/spotify/access-token';
+        const localVarPath = '/v1/spotify/auth/access-token';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);

@@ -1,9 +1,11 @@
 export * from '../models/Artist';
+export * from '../models/ArtistSongResponse';
 export * from '../models/AuthUrlResponse';
 export * from '../models/GetSpotifyAuthUrl500Response';
 export * from '../models/TokenResponse';
 
 import { Artist } from '../models/Artist';
+import { ArtistSongResponse } from '../models/ArtistSongResponse';
 import { AuthUrlResponse } from '../models/AuthUrlResponse';
 import { GetSpotifyAuthUrl500Response } from '../models/GetSpotifyAuthUrl500Response';
 import { TokenResponse } from '../models/TokenResponse';
@@ -25,6 +27,7 @@ let enumsMap: Set<string> = new Set<string>([
 
 let typeMap: {[index: string]: any} = {
     "Artist": Artist,
+    "ArtistSongResponse": ArtistSongResponse,
     "AuthUrlResponse": AuthUrlResponse,
     "GetSpotifyAuthUrl500Response": GetSpotifyAuthUrl500Response,
     "TokenResponse": TokenResponse,

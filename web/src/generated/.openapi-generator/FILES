@@ -1,7 +1,9 @@
 .gitattributes
 .gitignore
+DefaultApi.md
 README.md
 SpotifyApi.md
+apis/DefaultApi.ts
 apis/SpotifyApi.ts
 apis/baseapi.ts
 apis/exception.ts
@@ -13,6 +15,7 @@ http/isomorphic-fetch.ts
 index.ts
 middleware.ts
 models/Artist.ts
+models/ArtistSongResponse.ts
 models/AuthUrlResponse.ts
 models/GetSpotifyAuthUrl500Response.ts
 models/ObjectSerializer.ts

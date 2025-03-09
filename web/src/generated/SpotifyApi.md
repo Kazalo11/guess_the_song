@@ -4,7 +4,7 @@ All URIs are relative to *http://localhost:8080*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getAccessToken**](SpotifyApi.md#getAccessToken) | **GET** /v1/spotify/access-token | Gets current access token
+[**getAccessToken**](SpotifyApi.md#getAccessToken) | **GET** /v1/spotify/auth/access-token | Gets current access token
 [**getSpotifyAuthUrl**](SpotifyApi.md#getSpotifyAuthUrl) | **GET** /v1/spotify/auth/url | Get Spotify Authorization URL
 [**searchForArtists**](SpotifyApi.md#searchForArtists) | **GET** /v1/spotify/search/artists | Get artists based on name
 

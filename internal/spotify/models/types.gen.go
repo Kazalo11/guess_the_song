@@ -10,6 +10,11 @@ type Artist struct {
 	Name     string `json:"name"`
 }
 
+// ArtistSongResponse response from getting artist songs
+type ArtistSongResponse struct {
+	Songs []string `json:"songs"`
+}
+
 // AuthUrlResponse Schema for Spotify authentication URL response
 type AuthUrlResponse struct {
 	// AuthUrl The Spotify authorization URL

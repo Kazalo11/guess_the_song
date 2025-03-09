@@ -33,7 +33,7 @@ paths:
                   error:
                     type: string
                     description: Error message
-  /v1/spotify/access-token:
+  /v1/spotify/auth/access-token:
     get:
       summary: Gets current access token
       description: Gets current access token for user
@@ -48,7 +48,24 @@ paths:
               schema:
                 $ref: "#/components/schemas/TokenResponse"
             
-
+  /v1/spotify/artist/{artistId}/random-songs:
+    get: 
+      summary: Get random songs for an artist by ID
+      parameters:
+        - in: path
+          name: artistId
+          schema:
+            type: string
+          required: true
+          description: ArtistID
+      responses:
+        "200":
+          description: "Artist songs"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArtistSongResponse"
+  
   /v1/spotify/search/artists:
     get:
       summary: Get artists based on name
@@ -107,8 +124,6 @@ components:
   
       required:
         - access_token
- 
-
     Artist:
       description: Internal Artist
       type: object
@@ -125,5 +140,16 @@ components:
         - id
         - imageUrl
       additionalProperties: false
+    ArtistSongResponse:
+      description: response from getting artist songs
+      type: object
+      properties:
+        songs:
+          type: array
+          items:
+            type: string
+      required: 
+        - songs
+  
 
-#TODO: Update to have endpoint to get access token
+

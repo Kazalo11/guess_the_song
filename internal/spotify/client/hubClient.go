@@ -56,3 +56,7 @@ func searchForArtists(c *gin.Context) {
 	c.JSON(http.StatusOK, artists)
 
 }
+
+func getRandomSongsFromArtist(c *gin.Context) {
+
+}

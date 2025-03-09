@@ -3,9 +3,71 @@ import { Configuration, ConfigurationOptions, PromiseConfigurationOptions } from
 import { PromiseMiddleware, Middleware, PromiseMiddlewareWrapper } from '../middleware';
 
 import { Artist } from '../models/Artist';
+import { ArtistSongResponse } from '../models/ArtistSongResponse';
 import { AuthUrlResponse } from '../models/AuthUrlResponse';
 import { GetSpotifyAuthUrl500Response } from '../models/GetSpotifyAuthUrl500Response';
 import { TokenResponse } from '../models/TokenResponse';
+import { ObservableDefaultApi } from './ObservableAPI';
+
+import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
+export class PromiseDefaultApi {
+    private api: ObservableDefaultApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: DefaultApiRequestFactory,
+        responseProcessor?: DefaultApiResponseProcessor
+    ) {
+        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Get random songs for an artist by ID
+     * @param artistId ArtistID
+     */
+    public v1SpotifyArtistArtistIdRandomSongsGetWithHttpInfo(artistId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ArtistSongResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.v1SpotifyArtistArtistIdRandomSongsGetWithHttpInfo(artistId, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Get random songs for an artist by ID
+     * @param artistId ArtistID
+     */
+    public v1SpotifyArtistArtistIdRandomSongsGet(artistId: string, _options?: PromiseConfigurationOptions): Promise<ArtistSongResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.v1SpotifyArtistArtistIdRandomSongsGet(artistId, observableOptions);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
 import { ObservableSpotifyApi } from './ObservableAPI';
 
 import { SpotifyApiRequestFactory, SpotifyApiResponseProcessor} from "../apis/SpotifyApi";

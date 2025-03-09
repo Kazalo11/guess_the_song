@@ -35,6 +35,7 @@ func SpotifyRoutes(superRoute *gin.RouterGroup) {
 		spotifyRouter.GET("/callback", completeAuth)
 		spotifyRouter.GET("/search/artists", searchForArtists)
 		spotifyRouter.POST("/play/artist", playArtistSongs)
+		spotifyRouter.GET("/artist/{artistId}/random-songs")
 	}
 }
 

@@ -3,7 +3,7 @@ services:
   backend:
     build:
       context: .
-      dockerfile: deployments/backend/Dockerfile
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     environment:
@@ -14,17 +14,8 @@ services:
   frontend:
     build:
       context: .
-      dockerfile: deployments/web/Dockerfile
+      dockerfile: Dockerfile.web
     ports:
       - "3000:3000"
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-  watchtower:
-    image: containrrr/watchtower
-    command:
-      - "--label-enable"
-      - "--interval"
-      - "30"
-      - "--rolling-restart"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock

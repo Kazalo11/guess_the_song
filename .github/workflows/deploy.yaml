@@ -45,6 +45,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/Kazalo11/guess_the_song:${{ needs.commit-hash.outputs.commit_hash }}
+          tags: ghcr.io/kazalo11/guess_the_song:${{ needs.commit-hash.outputs.commit_hash }}
 
   

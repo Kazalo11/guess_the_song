@@ -1,12 +1,12 @@
 /* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
-/* eslint-disable */
-import type { Artist } from '../models/Artist';
-import type { AuthUrlResponse } from '../models/AuthUrlResponse';
+ 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
+import type { Artist } from '../models/Artist';
+import type { AuthUrlResponse } from '../models/AuthUrlResponse';
 export class SpotifyService {
     /**
      * Get Spotify Authorization URL

@@ -13,6 +13,7 @@ export default defineConfig({
   preview: {
     port: 3000,
     strictPort: true,
-    host: true
+    host: true,
+    allowedHosts: ["guess-the-song-frontend-811320721068.europe-west1.run.app"]
   }
 })

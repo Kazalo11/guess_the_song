@@ -6,6 +6,8 @@ info:
 servers:
   - url: http://localhost:8080
     description: Local development server
+  - url: https://guess-the-song-backend-811320721068.europe-west1.run.app
+    description: Production server
 paths:
   /v1/spotify/auth:
     get:

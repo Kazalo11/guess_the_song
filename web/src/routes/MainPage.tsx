@@ -26,7 +26,7 @@ export default function MainPage() {
           {artist && (
             <Button
               link="/play"
-              text="Click this to confirm this artist for guess the song"
+              text="Click this to confirm this artist for guess the song game"
             />
           )}
         </Card.Body>

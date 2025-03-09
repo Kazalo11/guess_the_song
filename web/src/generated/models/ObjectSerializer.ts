@@ -1,10 +1,12 @@
 export * from '../models/Artist';
 export * from '../models/AuthUrlResponse';
 export * from '../models/GetSpotifyAuthUrl500Response';
+export * from '../models/TokenResponse';
 
 import { Artist } from '../models/Artist';
 import { AuthUrlResponse } from '../models/AuthUrlResponse';
 import { GetSpotifyAuthUrl500Response } from '../models/GetSpotifyAuthUrl500Response';
+import { TokenResponse } from '../models/TokenResponse';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -25,6 +27,7 @@ let typeMap: {[index: string]: any} = {
     "Artist": Artist,
     "AuthUrlResponse": AuthUrlResponse,
     "GetSpotifyAuthUrl500Response": GetSpotifyAuthUrl500Response,
+    "TokenResponse": TokenResponse,
 }
 
 type MimeTypeDescriptor = {

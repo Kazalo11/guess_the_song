@@ -5,6 +5,7 @@ import { PromiseMiddleware, Middleware, PromiseMiddlewareWrapper } from '../midd
 import { Artist } from '../models/Artist';
 import { AuthUrlResponse } from '../models/AuthUrlResponse';
 import { GetSpotifyAuthUrl500Response } from '../models/GetSpotifyAuthUrl500Response';
+import { TokenResponse } from '../models/TokenResponse';
 import { ObservableSpotifyApi } from './ObservableAPI';
 
 import { SpotifyApiRequestFactory, SpotifyApiResponseProcessor} from "../apis/SpotifyApi";
@@ -17,6 +18,48 @@ export class PromiseSpotifyApi {
         responseProcessor?: SpotifyApiResponseProcessor
     ) {
         this.api = new ObservableSpotifyApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Gets current access token for user
+     * Gets current access token
+     */
+    public getAccessTokenWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<TokenResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAccessTokenWithHttpInfo(observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Gets current access token for user
+     * Gets current access token
+     */
+    public getAccessToken(_options?: PromiseConfigurationOptions): Promise<TokenResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAccessToken(observableOptions);
+        return result.toPromise();
     }
 
     /**

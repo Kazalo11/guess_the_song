@@ -1,3 +1,4 @@
+import AudioPlayer from "@/components/shared/AudioPlayer";
 import { useArtist } from "@/context/ArtistProvider";
 import { Card, Flex, Heading, Image } from "@chakra-ui/react";
 
@@ -14,6 +15,7 @@ export default function GamePage() {
         </Card.Header>
         <Card.Body p={6}>
           <Image src={artist?.imageUrl} alt={artist?.name} />
+          <AudioPlayer />
         </Card.Body>
       </Card.Root>
     </Flex>

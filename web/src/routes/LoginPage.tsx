@@ -17,7 +17,11 @@ export default function LoginPage() {
   return (
     <div>
       <ButtonGroup mt="24px">
-        <Button link={authUrl} text="Click this to login to spotify"></Button>
+        <Button
+          link={authUrl}
+          text="Click this to login to spotify"
+          external
+        ></Button>
       </ButtonGroup>
     </div>
   );

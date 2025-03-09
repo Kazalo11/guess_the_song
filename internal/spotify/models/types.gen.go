@@ -16,6 +16,11 @@ type AuthUrlResponse struct {
 	AuthUrl string `json:"authUrl"`
 }
 
+// TokenResponse Token information
+type TokenResponse struct {
+	AccessToken string `json:"access_token"`
+}
+
 // SearchForArtistsParams defines parameters for SearchForArtists.
 type SearchForArtistsParams struct {
 	// Name name of the spotify artist

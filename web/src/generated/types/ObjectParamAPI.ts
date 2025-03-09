@@ -5,9 +5,13 @@ import type { Middleware } from '../middleware';
 import { Artist } from '../models/Artist';
 import { AuthUrlResponse } from '../models/AuthUrlResponse';
 import { GetSpotifyAuthUrl500Response } from '../models/GetSpotifyAuthUrl500Response';
+import { TokenResponse } from '../models/TokenResponse';
 
 import { ObservableSpotifyApi } from "./ObservableAPI";
 import { SpotifyApiRequestFactory, SpotifyApiResponseProcessor} from "../apis/SpotifyApi";
+
+export interface SpotifyApiGetAccessTokenRequest {
+}
 
 export interface SpotifyApiGetSpotifyAuthUrlRequest {
 }
@@ -27,6 +31,24 @@ export class ObjectSpotifyApi {
 
     public constructor(configuration: Configuration, requestFactory?: SpotifyApiRequestFactory, responseProcessor?: SpotifyApiResponseProcessor) {
         this.api = new ObservableSpotifyApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Gets current access token for user
+     * Gets current access token
+     * @param param the request object
+     */
+    public getAccessTokenWithHttpInfo(param: SpotifyApiGetAccessTokenRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<TokenResponse>> {
+        return this.api.getAccessTokenWithHttpInfo( options).toPromise();
+    }
+
+    /**
+     * Gets current access token for user
+     * Gets current access token
+     * @param param the request object
+     */
+    public getAccessToken(param: SpotifyApiGetAccessTokenRequest = {}, options?: ConfigurationOptions): Promise<TokenResponse> {
+        return this.api.getAccessToken( options).toPromise();
     }
 
     /**

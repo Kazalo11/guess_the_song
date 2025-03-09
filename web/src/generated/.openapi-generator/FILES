@@ -1,6 +1,5 @@
 .gitattributes
 .gitignore
-.openapi-generator-ignore
 README.md
 SpotifyApi.md
 apis/SpotifyApi.ts
@@ -17,6 +16,7 @@ models/Artist.ts
 models/AuthUrlResponse.ts
 models/GetSpotifyAuthUrl500Response.ts
 models/ObjectSerializer.ts
+models/TokenResponse.ts
 models/all.ts
 package.json
 rxjsStub.ts

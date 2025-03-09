@@ -9,7 +9,7 @@ servers:
   - url: https://guess-the-song-backend-811320721068.europe-west1.run.app
     description: Production server
 paths:
-  /v1/spotify/auth:
+  /v1/spotify/auth/url:
     get:
       summary: Get Spotify Authorization URL
       description: Returns a URL that users can visit to authorize the application with their Spotify account
@@ -33,6 +33,22 @@ paths:
                   error:
                     type: string
                     description: Error message
+  /v1/spotify/access-token:
+    get:
+      summary: Gets current access token
+      description: Gets current access token for user
+      operationId: getAccessToken
+      tags: 
+        - spotify
+      responses:
+        "200":
+          description: Successfully got access token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenResponse"
+            
+
   /v1/spotify/search/artists:
     get:
       summary: Get artists based on name
@@ -82,6 +98,17 @@ components:
       required:
         - authUrl
       additionalProperties: false
+    TokenResponse:
+      description: Token information
+      type: object
+      properties:
+        access_token:
+          type: string
+  
+      required:
+        - access_token
+ 
+
     Artist:
       description: Internal Artist
       type: object
@@ -98,3 +125,5 @@ components:
         - id
         - imageUrl
       additionalProperties: false
+
+#TODO: Update to have endpoint to get access token

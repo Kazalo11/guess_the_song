@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 export type ButtonProps = {
   text: string;
   link?: string;
+  external?: boolean;
 };
 
 export function Button(props: ButtonProps) {
@@ -11,7 +12,11 @@ export function Button(props: ButtonProps) {
 
   const handleClick = () => {
     if (props.link) {
-      navigate(props.link);
+      if (props.external) {
+        window.location.href = props.link;
+      } else {
+        navigate(props.link);
+      }
     }
   };
   return (

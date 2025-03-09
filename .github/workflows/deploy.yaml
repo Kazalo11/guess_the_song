@@ -18,7 +18,7 @@ jobs:
       - name: Get commit hash
         id: get_commit
         run: echo "::set-output name=commit_hash::$(git rev-parse HEAD)"
-
+#build images
   build-and-push-image:
     needs:
       - commit-hash

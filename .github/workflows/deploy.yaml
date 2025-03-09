@@ -47,8 +47,8 @@ jobs:
           file: ./deployments/backend/Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/guess-the-song-backend:latest
-            ghcr.io/${{ github.repository_owner }}/guess-the-song-backend:${{ github.sha }}
+            ghcr.io/kazalo11/guess-the-song-backend:latest
+            ghcr.io/kazalo11/guess-the-song-backend:${{ github.sha }}
 
       - name: Build and push frontend
         uses: docker/build-push-action@v5
@@ -57,8 +57,8 @@ jobs:
           file: ./deployments/web/Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/guess-the-song-frontend:latest
-            ghcr.io/${{ github.repository_owner }}/guess-the-song-frontend:${{ github.sha }}
+            ghcr.io/kazalo11/guess-the-song-frontend:latest
+            ghcr.io/kazalo11/guess-the-song-frontend:${{ github.sha }}
 
     env:
       SPOTIFY_ID: ${{ secrets.SPOTIFY_ID }}

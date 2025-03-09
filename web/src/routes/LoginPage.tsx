@@ -1,4 +1,4 @@
-import { getSpotifyAuthUrl } from "@/client/ServerClient";
+import { getSpotifyAuthUrl } from "@/client/SpotifyClient";
 import { Button } from "@/components/shared/Button";
 import { ButtonGroup } from "@chakra-ui/react";
 import { useEffect, useState } from "react";

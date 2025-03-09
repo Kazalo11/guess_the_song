@@ -12,14 +12,11 @@
 
 import { HttpFile } from '../http/http';
 
-/**
-* Schema for Spotify authentication URL response
-*/
-export class AuthUrlResponse {
+export class GetSpotifyAuthUrl500Response {
     /**
-    * The Spotify authorization URL
+    * Error message
     */
-    'authUrl': string;
+    'error'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -27,14 +24,14 @@ export class AuthUrlResponse {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "authUrl",
-            "baseName": "authUrl",
+            "name": "error",
+            "baseName": "error",
             "type": "string",
-            "format": "uri"
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AuthUrlResponse.attributeTypeMap;
+        return GetSpotifyAuthUrl500Response.attributeTypeMap;
     }
 
     public constructor() {

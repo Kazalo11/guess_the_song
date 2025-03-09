@@ -1,14 +1,14 @@
+import { searchForArtists } from "@/client/SpotifyClient";
 import { Button } from "@/components/shared/Button";
 import Dropdown from "@/components/shared/Dropdown";
 import { useArtist } from "@/context/ArtistProvider";
-import { SpotifyService } from "@/generated";
 import { artistsToArtistOption } from "@/mapping/ArtistsToArtistOption";
 import { Card, Flex, Heading } from "@chakra-ui/react";
 
 export default function MainPage() {
   const { artist, setArtist } = useArtist();
   const loadArtists = async (artistName: string) => {
-    const response = await SpotifyService.searchForArtists(artistName);
+    const response = await searchForArtists(artistName);
     const artistOptions = artistsToArtistOption(response);
     return artistOptions;
   };

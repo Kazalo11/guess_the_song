@@ -77,7 +77,7 @@ components:
           description: The Spotify authorization URL
           format: uri
           pattern: ^https://accounts\.spotify\.com/authorize.*$
-          examples:
+          example:
             - https://accounts.spotify.com/authorize?client_id=xxx&response_type=code&redirect_uri=http://localhost:8080/v1/spotify/callback&scope=playlist-read-private+playlist-read-collaborative+user-library-read&state=abc123
       required:
         - authUrl
